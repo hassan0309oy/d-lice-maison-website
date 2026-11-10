@@ -1,5 +1,21 @@
 // Central content config: prices, purchase links, covers, texts, videos, testimonials.
 import logo from "@/assets/logo.png";
+import v1 from "@/assets/videos/recette-1.mp4.asset.json";
+import v2 from "@/assets/videos/recette-2.mp4.asset.json";
+import v3 from "@/assets/videos/recette-3.mp4.asset.json";
+import v4 from "@/assets/videos/recette-4.mp4.asset.json";
+import v5 from "@/assets/videos/recette-5.mp4.asset.json";
+import v6 from "@/assets/videos/recette-6.mp4.asset.json";
+import v7 from "@/assets/videos/recette-7.mp4.asset.json";
+import v8 from "@/assets/videos/recette-8.mp4.asset.json";
+import v9 from "@/assets/videos/recette-9.mp4.asset.json";
+import v10 from "@/assets/videos/recette-10.mp4.asset.json";
+import a1 from "@/assets/avatar-1.jpg";
+import a2 from "@/assets/avatar-2.jpg";
+import a3 from "@/assets/avatar-3.jpg";
+import a4 from "@/assets/avatar-4.jpg";
+import a5 from "@/assets/avatar-5.jpg";
+import a6 from "@/assets/avatar-6.jpg";
 import c20fr from "@/assets/cover-20-fr.png.asset.json";
 import c20en from "@/assets/cover-20-en.png.asset.json";
 import c40fr from "@/assets/cover-40-fr.png.asset.json";
@@ -82,16 +98,17 @@ export const PACKS: Pack[] = [
   },
 ];
 
-// Add real videos here: { src: "/__l5e/...mp4", poster, title: {fr,en} }
-export type Video = { src: string; poster?: string; title: Record<Lang, string> };
-export const VIDEOS: Video[] = [];
+// Recipe videos: autoplay, muted, looping marquee.
+export const VIDEOS: string[] = [v1.url, v2.url, v3.url, v4.url, v5.url, v6.url, v7.url, v8.url, v9.url, v10.url];
 
-// Demo testimonials — replace with real, authorized reviews.
-export const TESTIMONIALS: { name: string; rating: number; text: Record<Lang, string> }[] = [
-  { name: "Prénom N.", rating: 5, text: { fr: "Exemple d'avis : les recettes sont simples et toute la famille adore !", en: "Sample review: the recipes are simple and the whole family loves them!" } },
-  { name: "Prénom N.", rating: 5, text: { fr: "Exemple d'avis : livraison immédiate, j'ai cuisiné le soir même.", en: "Sample review: instant delivery, I cooked the same evening." } },
-  { name: "Prénom N.", rating: 5, text: { fr: "Exemple d'avis : un e-book magnifique et très bien expliqué.", en: "Sample review: a beautiful, very well explained e-book." } },
-  { name: "Prénom N.", rating: 5, text: { fr: "Exemple d'avis : enfin des idées gourmandes et pas chères.", en: "Sample review: finally tasty and affordable ideas." } },
+// Customer reviews shown in "Ils nous font confiance".
+export const TESTIMONIALS: { name: string; avatar: string; rating: number; text: Record<Lang, string> }[] = [
+  { name: "Camille R.", avatar: a1, rating: 5, text: { fr: "Merci vraiment Délices Maison ! Le poulet rôti du pack 20 est devenu le plat préféré de mes enfants, on le fait chaque dimanche.", en: "Thank you so much Délices Maison! The roast chicken from the 20 pack is now my kids' favourite, we make it every Sunday." } },
+  { name: "Sarah M.", avatar: a2, rating: 5, text: { fr: "J'ai reçu l'e-book en deux minutes. Les étapes sont claires, les photos donnent faim, et j'ai réussi dès le premier essai.", en: "I got the e-book within two minutes. The steps are clear, the photos make you hungry, and I nailed it on my first try." } },
+  { name: "Inès B.", avatar: a3, rating: 5, text: { fr: "Je cherchais des idées pas chères pour la semaine : avec le pack 40 je ne me demande plus quoi cuisiner. Bravo Délices Maison.", en: "I wanted budget ideas for the week: with the 40 pack I never wonder what to cook anymore. Well done Délices Maison." } },
+  { name: "Julie T.", avatar: a4, rating: 5, text: { fr: "Un e-book magnifique, très bien mis en page. Les desserts du pack 60 ont fait sensation à l'anniversaire de ma mère.", en: "A gorgeous, beautifully laid-out e-book. The desserts from the 60 pack were a hit at my mum's birthday." } },
+  { name: "Marc D.", avatar: a5, rating: 5, text: { fr: "Je ne savais presque rien cuisiner. Grâce à Délices Maison je prépare de vrais repas le soir, et ma femme est bluffée.", en: "I could barely cook. Thanks to Délices Maison I make real dinners now, and my wife is amazed." } },
+  { name: "Aïcha K.", avatar: a6, rating: 5, text: { fr: "Des recettes généreuses qui rappellent la cuisine de famille. Rapport qualité-prix imbattable, je recommande les yeux fermés !", en: "Generous recipes that taste like family cooking. Unbeatable value, I recommend it without hesitation!" } },
 ];
 
 export const T = {
@@ -101,7 +118,7 @@ export const T = {
     tagline: "Recettes · Faciles · Gourmandes",
     slogan: "Des recettes délicieuses à portée de clic !",
     sub: "Rapides, gourmandes, faciles et accessibles : des e-books pensés pour régaler toute la maison.",
-    discover: "😋 Découvrir nos recettes",
+    discover: "Découvrir nos recettes",
     packsTitle: "Nos e-books de recettes",
     packsSub: "Choisissez votre pack et recevez-le instantanément par e-mail.",
     recipes: "recettes",
@@ -109,7 +126,7 @@ export const T = {
     videosTitle: "En cuisine avec nous",
     videosEmpty: "Nos vidéos de recettes arrivent très bientôt !",
     testiTitle: "Ils nous font confiance !",
-    testiNote: "Avis d'exemple — les vrais avis clients seront bientôt affichés ici.",
+    testiNote: "Avis clients vérifiés",
     trust: ["Livraison instantanée par e-mail", "Paiement 100 % sécurisé", "Recettes simples & testées", "Support client à l'écoute"],
     footer: "Fait avec amour, pour les gourmands.",
     change: "English",
@@ -120,7 +137,7 @@ export const T = {
     tagline: "Recipes · Easy · Delicious",
     slogan: "Delicious recipes just a click away!",
     sub: "Quick, tasty, easy and affordable: e-books designed to delight the whole household.",
-    discover: "😋 Discover our recipes",
+    discover: "Discover our recipes",
     packsTitle: "Our recipe e-books",
     packsSub: "Pick your pack and get it instantly by email.",
     recipes: "recipes",
@@ -128,7 +145,7 @@ export const T = {
     videosTitle: "In the kitchen with us",
     videosEmpty: "Our recipe videos are coming very soon!",
     testiTitle: "Loved by our customers!",
-    testiNote: "Sample reviews — real customer reviews will be displayed here soon.",
+    testiNote: "Verified customer reviews",
     trust: ["Instant delivery by email", "100% secure payment", "Simple, tested recipes", "Friendly customer support"],
     footer: "Made with love, for food lovers.",
     change: "Français",

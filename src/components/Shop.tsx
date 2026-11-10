@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Zap, ShieldCheck, ChefHat, Headphones, Heart, Star, Play, ChevronLeft, ChevronRight, Check } from "lucide-react";
-import hero from "@/assets/hero-feast.jpg";
+import { Zap, ShieldCheck, ChefHat, Headphones, Heart, Star, ChevronLeft, ChevronRight, Check } from "lucide-react";
+import hero from "@/assets/hero-plate-ref.jpg";
 import { LANG_KEY, LOGO_URL, PACKS, T, TESTIMONIALS, VIDEOS, type Lang } from "@/config/site";
 
 const X = {
@@ -61,7 +61,7 @@ export function Shop({ lang }: { lang: Lang }) {
             <a href="#packs" className="hidden rounded-full bg-primary px-5 py-2 text-sm font-bold text-primary-foreground md:inline-block">{t.packsTitle}</a>
             <Link to={other === "fr" ? "/fr" : "/en"} onClick={() => localStorage.setItem(LANG_KEY, other)}
               className="rounded-full bg-cream px-4 py-2 text-sm font-extrabold text-cocoa shadow-soft transition hover:scale-105">
-              {other === "fr" ? "🇫🇷 French" : "🇬🇧 English"}
+              <span className="emoji">{other === "fr" ? "🇫🇷" : "🇬🇧"}</span> {other === "fr" ? "Français" : "English"}
             </Link>
           </nav>
         </header>
@@ -69,7 +69,7 @@ export function Shop({ lang }: { lang: Lang }) {
           <p className="absolute right-6 top-2 hidden max-w-[220px] rotate-[-6deg] font-script text-2xl text-cream text-glow lg:block">{x.side}</p>
           <div className="max-w-xl">
             <h1 className="font-script text-5xl leading-[1.1] text-cream text-glow md:text-7xl">
-              {x.slogan1} <span className="text-sun">{x.slogan2}</span><br />{x.slogan3} <span className="inline-block animate-floaty">😋</span>
+              {x.slogan1} <span className="text-sun">{x.slogan2}</span><br />{x.slogan3} <span className="emoji animate-floaty">😋</span>
             </h1>
             <p className="mt-6 text-lg font-bold text-cream text-glow md:text-xl">{x.sub1}<br />{x.sub2} <span className="text-sun">{x.sub3}</span></p>
             <a href="#packs" className="mt-8 inline-flex items-center gap-3 rounded-full bg-sun px-8 py-4 text-lg font-extrabold text-cocoa shadow-cover transition hover:-translate-y-1 hover:scale-105">
@@ -87,7 +87,7 @@ export function Shop({ lang }: { lang: Lang }) {
           <Slider label={t.packsTitle}>
             {PACKS.map((p) => (
               <article key={p.id} className="relative flex w-[86%] shrink-0 snap-center flex-col gap-5 rounded-3xl bg-card p-5 shadow-soft ring-1 ring-border sm:w-[70%] md:w-[calc(50%-12px)] md:flex-row md:items-center">
-                {p.featured && <span className="absolute -top-3 right-5 z-10 rounded-full bg-tomato px-4 py-1 text-xs font-extrabold uppercase text-cream shadow-soft">{t.popular}</span>}
+                {p.featured && <span className="absolute -top-3 right-5 z-10 rounded-full bg-cocoa px-4 py-1 text-xs font-extrabold uppercase text-cream shadow-soft">{t.popular}</span>}
                 <div className="group mx-auto w-3/5 shrink-0 [perspective:1000px] md:w-[44%]">
                   <img src={p.cover[lang]} alt={p.name[lang]} width={1160} height={1355} className="w-full -rotate-2 rounded-lg shadow-cover transition duration-500 group-hover:rotate-0 group-hover:scale-105" />
                 </div>
@@ -98,12 +98,12 @@ export function Shop({ lang }: { lang: Lang }) {
                     {p.benefits[lang].map((b) => <li key={b} className="flex items-center gap-2"><span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sun text-cocoa"><Check className="h-3 w-3" strokeWidth={4} /></span>{b}</li>)}
                   </ul>
                   <div className="mt-4 flex items-center gap-3">
-                    {p.oldPrice && <s className="text-xl font-bold text-muted-foreground">{p.oldPrice}</s>}
-                    <span className="rounded-xl bg-tomato px-4 py-1.5 text-3xl font-black text-cream shadow-soft">{p.price}</span>
+                    {p.oldPrice && <s className="font-price text-xl text-muted-foreground">{p.oldPrice}</s>}
+                    <span className="font-price text-4xl font-semibold tracking-wide text-primary">{p.price}</span>
                   </div>
                   <a href={p.link[lang]} target="_blank" rel="noopener noreferrer"
                     className="mt-4 block rounded-full bg-sun px-6 py-3 text-center font-extrabold text-cocoa shadow-soft transition hover:-translate-y-0.5 hover:scale-[1.02]">
-                    {p.cta[lang]}
+                    {(() => { const [e, ...rest] = p.cta[lang].split(" "); return <><span className="emoji text-sm">{e}</span> {rest.join(" ")}</>; })()}
                   </a>
                 </div>
               </article>
@@ -126,24 +126,14 @@ export function Shop({ lang }: { lang: Lang }) {
       {/* VIDEO + REVIEWS */}
       <section className="mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-2 md:items-center">
         <div className="reveal">
-          {VIDEOS.length ? (
-            <div className="no-scrollbar flex snap-x gap-4 overflow-x-auto pb-2">
-              {VIDEOS.map((v) => (
-                <figure key={v.src} className="w-60 shrink-0 snap-center overflow-hidden rounded-3xl bg-card shadow-cover">
-                  <video src={v.src} poster={v.poster} controls playsInline preload="metadata" className="aspect-[9/16] w-full object-cover" />
-                  <figcaption className="p-3 text-sm font-bold">{v.title[lang]}</figcaption>
-                </figure>
+          <div className="overflow-hidden rounded-[2rem] shadow-cover ring-4 ring-card [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
+            <div className="flex w-max animate-video-marquee gap-4 py-4">
+              {[...VIDEOS, ...VIDEOS].map((src, i) => (
+                <video key={i} src={src} autoPlay muted loop playsInline preload="metadata" aria-hidden={i >= VIDEOS.length}
+                  className="aspect-[9/16] w-40 shrink-0 rounded-2xl object-cover md:w-48" />
               ))}
             </div>
-          ) : (
-            <div className="relative overflow-hidden rounded-[2rem] shadow-cover ring-4 ring-card">
-              <img src={hero} alt="" loading="lazy" className="aspect-video w-full object-cover" />
-              <div className="absolute inset-0 grid place-items-center bg-cocoa/30">
-                <span className="grid h-20 w-20 place-items-center rounded-full border-4 border-cream bg-cocoa/60 text-cream"><Play className="ml-1 h-9 w-9 fill-current" /></span>
-              </div>
-              <span className="absolute bottom-3 left-3 rounded-full bg-cocoa/80 px-4 py-1.5 text-sm font-bold text-cream">{t.videosEmpty}</span>
-            </div>
-          )}
+          </div>
           <div className="mt-6 text-center">
             <h2 className="font-script text-3xl text-primary md:text-4xl">{x.apercu}</h2>
             <p className="mt-2 text-muted-foreground">{x.apercuSub}</p>
@@ -152,9 +142,14 @@ export function Shop({ lang }: { lang: Lang }) {
         <div className="reveal">
           <h2 className="text-center font-script text-4xl text-primary">{t.testiTitle}</h2>
           <blockquote key={ti} className="mt-6 animate-in fade-in rounded-3xl bg-card p-6 shadow-soft ring-1 ring-border">
-            <div className="flex text-sun">{Array.from({ length: r.rating }).map((_, s) => <Star key={s} className="h-6 w-6 fill-current" />)}</div>
-            <p className="mt-3 text-base">“{r.text[lang]}”</p>
-            <footer className="mt-3 font-extrabold text-primary">— {r.name}</footer>
+            <div className="flex items-center gap-4">
+              <img src={r.avatar} alt={r.name} width={816} height={816} loading="lazy" className="h-16 w-16 shrink-0 rounded-full object-cover ring-2 ring-sun" />
+              <div>
+                <p className="font-extrabold text-primary">{r.name}</p>
+                <div className="flex items-center gap-1 text-sun">{Array.from({ length: r.rating }).map((_, s) => <Star key={s} className="h-4 w-4 fill-current" />)}<span className="ml-1 text-xs font-bold text-muted-foreground">{r.rating}/5</span></div>
+              </div>
+            </div>
+            <p className="mt-4 text-base">“{r.text[lang]}”</p>
           </blockquote>
           <div className="mt-4 flex items-center justify-between">
             <button aria-label="←" onClick={() => setTi((ti - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)} className="rounded-full bg-cocoa p-2 text-cream"><ChevronLeft className="h-5 w-5" /></button>
@@ -173,7 +168,7 @@ export function Shop({ lang }: { lang: Lang }) {
           </div>
           <a href="#packs" className="rounded-full bg-sun px-6 py-3 font-extrabold text-cocoa">{x.more}</a>
         </div>
-        <p className="mt-8 border-t border-cream/20 px-5 pt-6 text-center text-sm opacity-90">© 2026 Délices Maison. {x.rights} ❤️ {x.love}</p>
+        <p className="mt-8 border-t border-cream/20 px-5 pt-6 text-center text-sm opacity-90">© 2026 Délices Maison. {x.rights} · {x.love}</p>
       </footer>
     </div>
   );

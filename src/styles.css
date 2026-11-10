@@ -35,7 +35,10 @@
   --font-script: "Kaushan Script", cursive;
   --font-display: "Kaushan Script", cursive;
   --font-sans: "Nunito", system-ui, sans-serif;
+  --font-price: "Cormorant Garamond", Georgia, serif;
   --color-sun: var(--sun);
+  --color-caramel: var(--caramel);
+  --color-sand: var(--sand);
   --color-tomato: var(--tomato);
 }
 
@@ -60,6 +63,10 @@
   --cream: oklch(0.97 0.025 75);
   --sun: oklch(0.83 0.16 80);
   --tomato: oklch(0.55 0.21 27);
+  --caramel: oklch(0.66 0.08 60);
+  --sand: oklch(0.62 0.05 70);
+  --gradient-caramel: linear-gradient(180deg, oklch(0.72 0.08 65), oklch(0.6 0.08 55));
+  --gradient-sand: radial-gradient(ellipse at center, oklch(0.66 0.05 72), oklch(0.5 0.045 60));
   --gradient-sun: linear-gradient(180deg, oklch(0.87 0.15 88), oklch(0.76 0.16 65));
   --gradient-hero: linear-gradient(90deg, oklch(0.2 0.04 40 / 0.92) 0%, oklch(0.22 0.04 40 / 0.7) 40%, oklch(0.2 0.04 40 / 0) 75%);
   --gradient-peach: linear-gradient(180deg, oklch(0.95 0.035 70), oklch(0.93 0.045 65));
@@ -80,6 +87,10 @@
   h1, h2, h3 { font-family: var(--font-display); }
 }
 
+@utility bg-caramel-grad { background-image: var(--gradient-caramel); }
+@utility bg-sand-grad { background-image: var(--gradient-sand); }
+@utility emoji { font-size: 0.9em; line-height: 1; display: inline-block; vertical-align: -0.05em; }
+@utility font-price { font-family: var(--font-price); font-style: italic; }
 @utility bg-sun { background-image: var(--gradient-sun); }
 @utility bg-hero-fade { background-image: var(--gradient-hero); }
 @utility bg-peach { background-image: var(--gradient-peach); }
@@ -107,3 +118,5 @@
   .reveal { opacity: 1; transform: none; transition: none; }
   .animate-marquee, .animate-floaty { animation: none; }
 }
+
+@utility animate-video-marquee { animation: marquee 60s linear infinite; }
