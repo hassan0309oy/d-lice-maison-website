@@ -68,8 +68,8 @@ export function Shop({ lang }: { lang: Lang }) {
         <div className="relative mx-auto max-w-6xl px-5 pt-14 md:pt-20">
           <p className="absolute right-6 top-2 hidden max-w-[220px] rotate-[-6deg] font-script text-2xl text-cream text-glow lg:block">{x.side}</p>
           <div className="max-w-xl">
-            <h1 className="font-script text-5xl leading-[1.1] text-cream text-glow md:text-7xl">
-              {x.slogan1} <span className="text-sun">{x.slogan2}</span><br />{x.slogan3} <span className="emoji animate-floaty">😋</span>
+            <h1 className="font-script text-[2.1rem] leading-[1.15] text-cream text-glow sm:text-5xl md:text-6xl">
+              {x.slogan1} <span className="text-sun">{x.slogan2}</span><br />{x.slogan3} <span className="emoji animate-floaty text-[0.55em]">😋</span>
             </h1>
             <p className="mt-6 text-lg font-bold text-cream text-glow md:text-xl">{x.sub1}<br />{x.sub2} <span className="text-sun">{x.sub3}</span></p>
             <a href="#packs" className="mt-8 inline-flex items-center gap-3 rounded-full bg-sun px-8 py-4 text-lg font-extrabold text-cocoa shadow-cover transition hover:-translate-y-1 hover:scale-105">
@@ -92,7 +92,7 @@ export function Shop({ lang }: { lang: Lang }) {
                   <img src={p.cover[lang]} alt={p.name[lang]} width={1160} height={1355} className="w-full -rotate-2 rounded-lg shadow-cover transition duration-500 group-hover:rotate-0 group-hover:scale-105" />
                 </div>
                 <div className="flex flex-1 flex-col">
-                  <h3 className="font-script text-3xl leading-tight text-primary">{p.name[lang]}</h3>
+                  <h3 className="font-script text-2xl leading-tight text-primary md:text-3xl">{p.name[lang]}</h3>
                   <p className="mt-2 text-sm font-bold text-foreground">{p.description[lang]}</p>
                   <ul className="mt-3 space-y-1.5 text-sm">
                     {p.benefits[lang].map((b) => <li key={b} className="flex items-center gap-2"><span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sun text-cocoa"><Check className="h-3 w-3" strokeWidth={4} /></span>{b}</li>)}
