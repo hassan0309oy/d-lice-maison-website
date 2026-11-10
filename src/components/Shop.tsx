@@ -124,7 +124,7 @@ export function Shop({ lang }: { lang: Lang }) {
       </section>
 
       {/* VIDEO + REVIEWS */}
-      <section className="mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-2 md:items-center">
+      <section className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-5 py-16 [&>*]:min-w-0">
         <div>
           <div className="overflow-hidden rounded-[2rem] shadow-cover ring-4 ring-card [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
             <div className="flex w-max animate-video-marquee gap-4 py-4">
@@ -141,7 +141,7 @@ export function Shop({ lang }: { lang: Lang }) {
         </div>
         <div>
           <h2 className="text-center font-script text-4xl text-primary">{t.testiTitle}</h2>
-          <blockquote key={ti} className="mt-6 animate-in fade-in rounded-3xl bg-card p-6 shadow-soft ring-1 ring-border">
+          <blockquote key={ti} className="mx-auto mt-6 max-w-2xl animate-in fade-in rounded-3xl bg-card p-6 shadow-soft ring-1 ring-border">
             <div className="flex items-center gap-4">
               <img src={r.avatar} alt={r.name} width={816} height={816} loading="lazy" className="h-16 w-16 shrink-0 rounded-full object-cover ring-2 ring-sun" />
               <div>
